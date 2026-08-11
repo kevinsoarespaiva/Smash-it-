@@ -1,12 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Handjet:wght,ELSH@100..900,2&display=swap');
-/* <header> */
+/* <head> */
 body{
     font-family: Handjet, serif;
+    box-sizing: border-box;
+    font-weight: 700;
+}
+/* </head> */
+/* <body> */
+/* <header> */
+header{
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    border-bottom: 0.5rem solid rgb(255, 221, 0);
+    color: white;
+}
+#infobar{
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 800px;
+    min-height: 100%;
+    font-size: 2rem;
+}
+#infobar>div{
+    margin: auto;
+    text-align: center;
+}
+.indicators{
+    color: red;
+}
+#menu-lives img{
+    max-height: 2rem;
+}
+#menu-lives{
+    display: flex;
+    align-items: center;
+}
+#menu-lives *{
+    padding: 0 0.2rem;
 }
 /* </header> */
-/* <body> */
+/* <main> */
 
-/* </body> */
+/* </main> */
 /* <footer> */
 
 /* </footer> */
+/* </body> */
