@@ -5,15 +5,19 @@ body{
     box-sizing: border-box;
     font-weight: 700;
 }
+a{
+    text-decoration: none;
+    color: red;
+}
 /* </head> */
 /* <body> */
 /* <header> */
 header{
     display: flex;
     justify-content: center;
-    background-color: black;
+    background-color: #000000;
     border-bottom: 0.5rem solid rgb(255, 221, 0);
-    color: white;
+    color: #ffffff;
 }
 #infobar{
     display: flex;
@@ -29,7 +33,7 @@ header{
     text-align: center;
 }
 .indicators{
-    color: red;
+    color: rgb(255, 0, 0);
 }
 #menu-lives img{
     max-height: 2rem;
@@ -80,6 +84,16 @@ main{
 }
 /* </main> */
 /* <footer> */
-
+footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+    border-top: 0.5rem solid rgb(255, 221, 0);
+    color: #ffffff;
+    min-height: 15vh;
+    font-size: 1.5rem;
+}
 /* </footer> */
 /* </body> */
