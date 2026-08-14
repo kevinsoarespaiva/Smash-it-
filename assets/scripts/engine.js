@@ -38,10 +38,12 @@ const state = {
                     state.values.baseScore++;
                     state.view.score.textContent = state.values.baseScore;
                     state.values.enemypos.classList.remove("enemy");
+                    sfx("hit-sound.wav");
                     state.values.enemypos.classList.add("enemy-hit");
                     state.values.hitBox = null;
                 }
                 else{
+                    sfx("wrongHitSound.wav")
                     state.values.lifeCounter--;
                     state.view.lives.textContent = state.values.lifeCounter;
                     stopGame()
@@ -62,11 +64,18 @@ const state = {
             state.values.lifeCounter = 3
             state.view.lives.textContent = state.values.lifeCounter;
             state.view.score.textContent = state.values.baseScore;
+            sfx("gameCompleted.wav")
         }
-
     }
-    function gameOver(){
-        }
+    function sfx(soundName){
+        let audioHit= new Audio(`assets/audio/${soundName}`);
+        audioHit.volume= .3;
+        audioHit.play();
+    }
+    function wrongHit(){
+        let wrongHitAudio= new Audio("assets/audio/wrongHitSound.wav");
+        wrongHitAudio.play();
+    }
     function countDown(){
         state.values.countDownId = setInterval(timeLeft, state.values.counter)
     }
