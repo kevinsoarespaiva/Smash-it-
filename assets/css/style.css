@@ -48,6 +48,7 @@ header{
 /* </header> */
 /* <main> */
 main{
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -82,6 +83,38 @@ main{
     background-image: url(../images/enemy/zumbi_hit.png);
     background-size: contain;
     background-position: center;
+}
+#start{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #000000;
+    border: 2px solid #ff0000;
+    width: inherit;
+    min-height: inherit;
+}
+#start-button{
+    height: fit-content;
+    padding: 1rem 2rem;
+    font-size: 2rem;
+    background-color: #000000;
+    color: #ffffff;
+    border: 0.5rem solid rgb(255, 221, 0);
+    font-family: Handjet, serif;
+}
+#position-start{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 400px;
+    min-height: 400px;
+
+}
+.hidden{
+    display: none;
 }
 /* </main> */
 /* <footer> */
