@@ -4,6 +4,7 @@ body{
     font-family: Handjet, serif;
     box-sizing: border-box;
     font-weight: 700;
+    color: #ffffff;
 }
 a{
     text-decoration: none;
@@ -94,7 +95,7 @@ main{
     width: inherit;
     min-height: inherit;
 }
-#start-button{
+.action-button{
     height: fit-content;
     padding: 1rem 2rem;
     font-size: 2rem;
@@ -111,7 +112,36 @@ main{
     width: 100%;
     max-width: 400px;
     min-height: 400px;
-
+}
+#position-gameover{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 400px;
+    min-height: 400px;
+}
+#gameover{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #000000;
+    border: 2px solid #ff0000;
+    width: inherit;
+    min-height: inherit;
+}
+#gameover h2{
+    font-size: 3rem;
+    text-align: center;
+    padding: 1rem 0;
+}
+#gameover h3{
+    font-size: 2rem;
+    text-align: center;
+    padding: 1rem 0;
 }
 .hidden{
     display: none;
