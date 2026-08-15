@@ -22,7 +22,12 @@ const state = {
         countDownId: null,
         lifeCounter: 3,
         gameRunning: false,
-    }
+    },
+    sounds:{
+        hitSound: new Audio(`assets/audio/hit-sound.wav`),
+        gameCompleted: new Audio(`assets/audio/gameCompleted.wav`),
+        missSound: new Audio(`assets/audio/wrongHitSound.wav`),
+    },
 };
     function randomBox(){
         state.view.boxes.forEach((box) => {
@@ -45,12 +50,12 @@ const state = {
                     state.values.baseScore++;
                     state.view.score.textContent = state.values.baseScore;
                     state.values.enemypos.classList.remove("enemy");
-                    sfx("hit-sound.wav");
+                    sfx("hitSound");
                     state.values.enemypos.classList.add("enemy-hit");
                     state.values.hitBox = null;
                 }
                 else{
-                    sfx("wrongHitSound.wav")
+                    sfx("missSound")
                     state.values.lifeCounter--;
                     state.view.lives.textContent = state.values.lifeCounter;
                     stopGame()
@@ -65,16 +70,17 @@ const state = {
     }
     function stopGame(){
         if(state.values.timer<=0 || state.values.lifeCounter <=0){
-            sfx("gameCompleted.wav");
+            sfx("gameCompleted");
             state.view.finalScore.textContent = state.values.baseScore;
             showdiv("gameOverDiv");
             reset();
         }
     }
     function sfx(soundName){
-        let audioHit= new Audio(`assets/audio/${soundName}`);
-        audioHit.volume= .3;
-        audioHit.play();
+        let sound = state.sounds[soundName];
+        sound.volume= .3;
+        sound.currentTime = 0;
+        sound.play();
     }
     function wrongHit(){
         let wrongHitAudio= new Audio("assets/audio/wrongHitSound.wav");
@@ -108,12 +114,16 @@ function main() {
     stopGame();
     }
 };
+Object.values(state.sounds).forEach(audio => {
+    audio.preload = "auto";
+    audio.load();
+});
 listenerhitEnemy();
 state.view.restartbtn.addEventListener("click", ()=>{
     hiddediv("gameOverDiv");
     state.values.gameRunning = true;
     main();
-})
+});
 state.view.startBtn.addEventListener("click", ()=>{
     state.values.gameRunning = true;
     hiddediv("startDiv");
