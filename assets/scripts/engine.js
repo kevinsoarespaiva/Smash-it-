@@ -6,7 +6,10 @@ const state = {
         score: document.querySelector("#score"),
         lives: document.querySelector("#lives-left"),
         startDiv: document.querySelector("#position-start"),
+        gameOverDiv: document.querySelector("#position-gameover"),
+        finalScore: document.querySelector("#final-score"),
         startBtn: document.querySelector("#start-button"),
+        restartbtn:document.querySelector("#restart-button"),
     },
     values: {
         timerId: null,
@@ -62,8 +65,9 @@ const state = {
     }
     function stopGame(){
         if(state.values.timer<=0 || state.values.lifeCounter <=0){
-            alert("Game over! Your score: " +state.values.baseScore);
             sfx("gameCompleted.wav");
+            state.view.finalScore.textContent = state.values.baseScore;
+            showdiv("gameOverDiv");
             reset();
         }
     }
@@ -79,20 +83,20 @@ const state = {
     function countDown(){
         state.values.countDownId = setInterval(timeLeft, state.values.counter)
     }
-    function hiddeStartDiv(){
-        state.view.startDiv.classList.add("hidden")
+    function hiddediv(divhidden){
+        state.view[divhidden]?.classList.add("hidden");
     }
-    function showStartDiv(){
-        state.view.startDiv.classList.remove("hidden")
+    function showdiv(divshown){
+        state.view[divshown]?.classList.remove("hidden");
     }
+
     function reset(){
+        state.values.gameRunning = false;
         state.values.timer = 60;
         state.values.baseScore = 0;
         state.values.lifeCounter = 3;
         state.view.lives.textContent = state.values.lifeCounter;
         state.view.score.textContent = state.values.baseScore;
-        state.values.gameRunning = false;
-        showStartDiv();
         clearInterval(state.values.timerId);
         clearInterval(state.values.countDownId);
         state.values.enemypos?.classList.remove("enemy", "enemy-hit");
@@ -105,9 +109,14 @@ function main() {
     }
 };
 listenerhitEnemy();
+state.view.restartbtn.addEventListener("click", ()=>{
+    hiddediv("gameOverDiv");
+    state.values.gameRunning = true;
+    main();
+})
 state.view.startBtn.addEventListener("click", ()=>{
     state.values.gameRunning = true;
-    hiddeStartDiv();
+    hiddediv("startDiv");
     main();
     }
 );
