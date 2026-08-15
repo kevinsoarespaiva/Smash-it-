@@ -10,10 +10,14 @@ a{
     text-decoration: none;
     color: red;
 }
+.hidden{
+    display: none;
+}
 /* </head> */
 /* <body> */
 /* <header> */
 header{
+    position: relative;
     display: flex;
     justify-content: center;
     background-color: #000000;
@@ -25,7 +29,7 @@ header{
     justify-content: center;
     padding: 1.5rem;
     width: 100%;
-    max-width: 800px;
+    max-width: 700px;
     min-height: 100%;
     font-size: 2rem;
 }
@@ -35,6 +39,24 @@ header{
 }
 .indicators{
     color: rgb(255, 0, 0);
+}
+#level{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translatey(-50%);
+    width: fit-content;
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+}
+input[type="radio"]{
+    accent-color: #ff0000;
+}
+#level label{
+    font-size: 1.3rem;
 }
 #menu-lives img{
     max-height: 2rem;
@@ -142,9 +164,6 @@ main{
     font-size: 2rem;
     text-align: center;
     padding: 1rem 0;
-}
-.hidden{
-    display: none;
 }
 /* </main> */
 /* <footer> */

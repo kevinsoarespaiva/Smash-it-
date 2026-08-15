@@ -9,11 +9,12 @@ const state = {
         gameOverDiv: document.querySelector("#position-gameover"),
         finalScore: document.querySelector("#final-score"),
         startBtn: document.querySelector("#start-button"),
-        restartbtn:document.querySelector("#restart-button"),
+        restartbtn: document.querySelector("#restart-button"),
+        radiolevel: document.querySelectorAll('input[name="level"]')
     },
     values: {
         timerId: null,
-        enemyVel: 1000,
+        enemyVel: null,
         hitBox: null,
         baseScore: 0,
         enemypos: 0,
@@ -22,6 +23,8 @@ const state = {
         countDownId: null,
         lifeCounter: 3,
         gameRunning: false,
+        selectedvel: null,
+
     },
     sounds:{
         hitSound: new Audio(`assets/audio/hit-sound.wav`),
@@ -38,10 +41,11 @@ const state = {
         state.values.enemypos = state.view.boxes[randomNumber];
         state.values.enemypos.classList.add("enemy");
         state.values.hitBox = state.values.enemypos.id;
-    }
+    };
     function movement(){
+        state.values.enemyVel = setDifficulty();
         state.values.timerId = setInterval(randomBox, state.values.enemyVel)
-    }
+    };
     function listenerhitEnemy(){
         state.view.boxes.forEach((box) => {
             box.addEventListener("mousedown", () => {
@@ -62,12 +66,12 @@ const state = {
                 }
             }) 
         })
-    }
+    };
     function timeLeft(){
         state.values.timer --;
         state.view.time.textContent = state.values.timer;
         stopGame()
-    }
+    };
     function stopGame(){
         if(state.values.timer<=0 || state.values.lifeCounter <=0){
             sfx("gameCompleted");
@@ -75,26 +79,26 @@ const state = {
             showdiv("gameOverDiv");
             reset();
         }
-    }
+    };
     function sfx(soundName){
         let sound = state.sounds[soundName];
         sound.volume= .3;
         sound.currentTime = 0;
         sound.play();
-    }
+    };
     function wrongHit(){
         let wrongHitAudio= new Audio("assets/audio/wrongHitSound.wav");
         wrongHitAudio.play();
-    }
+    };
     function countDown(){
         state.values.countDownId = setInterval(timeLeft, state.values.counter)
-    }
+    };
     function hiddediv(divhidden){
         state.view[divhidden]?.classList.add("hidden");
-    }
+    };
     function showdiv(divshown){
         state.view[divshown]?.classList.remove("hidden");
-    }
+    };
 
     function reset(){
         state.values.gameRunning = false;
@@ -106,12 +110,34 @@ const state = {
         clearInterval(state.values.timerId);
         clearInterval(state.values.countDownId);
         state.values.enemypos?.classList.remove("enemy", "enemy-hit");
+        disableInput(false);
+    };
+    function setDifficulty(){
+        state.values.selectedvel = document.querySelector('input[name="level"]:checked').value;
+        let speed = null;
+        if (state.values.selectedvel == "easy"){
+            speed = 1000;
+        }
+        else if(state.values.selectedvel == "medium"){
+            speed = 800;
+        }
+        else{
+            speed = 500;
+        }
+        return speed;
+    };
+    function disableInput(disable){
+        state.view.radiolevel.forEach((input) => {
+            input.disabled = disable;
+        });
     }
 function main() {
     if(state.values.gameRunning == true){
-    movement();
-    countDown();
-    stopGame();
+        setDifficulty()
+        movement();
+        countDown();
+        stopGame();
+        disableInput(true);
     }
 };
 Object.values(state.sounds).forEach(audio => {
