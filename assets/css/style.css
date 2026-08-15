@@ -10,6 +10,9 @@ a{
     text-decoration: none;
     color: red;
 }
+.hidden{
+    display: none;
+}
 /* </head> */
 /* <body> */
 /* <header> */
@@ -161,9 +164,6 @@ main{
     font-size: 2rem;
     text-align: center;
     padding: 1rem 0;
-}
-.hidden{
-    display: none;
 }
 /* </main> */
 /* <footer> */
