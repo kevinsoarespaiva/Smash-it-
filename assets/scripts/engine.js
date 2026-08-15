@@ -13,7 +13,7 @@ const state = {
     },
     values: {
         timerId: null,
-        enemyVel: 1000,
+        enemyVel: null,
         hitBox: null,
         baseScore: 0,
         enemypos: 0,
@@ -40,6 +40,7 @@ const state = {
         state.values.hitBox = state.values.enemypos.id;
     }
     function movement(){
+        state.values.enemyVel = setDifficulty();
         state.values.timerId = setInterval(randomBox, state.values.enemyVel)
     }
     function listenerhitEnemy(){
@@ -107,11 +108,26 @@ const state = {
         clearInterval(state.values.countDownId);
         state.values.enemypos?.classList.remove("enemy", "enemy-hit");
     }
+    function setDifficulty(){
+        let selectedvel = document.querySelector('input[name="level"]:checked').value;
+        let speed = null;
+        if (selectedvel == "easy"){
+            speed = 1000;
+        }
+        else if(selectedvel == "medium"){
+            speed = 800;
+        }
+        else{
+            speed = 500;
+        }
+        return speed;
+}
 function main() {
     if(state.values.gameRunning == true){
-    movement();
-    countDown();
-    stopGame();
+        setDifficulty()
+        movement();
+        countDown();
+        stopGame();
     }
 };
 Object.values(state.sounds).forEach(audio => {
