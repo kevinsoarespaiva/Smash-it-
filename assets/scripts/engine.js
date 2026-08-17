@@ -10,7 +10,8 @@ const state = {
         finalScore: document.querySelector("#final-score"),
         startBtn: document.querySelector("#start-button"),
         restartbtn: document.querySelector("#restart-button"),
-        radiolevel: document.querySelectorAll('input[name="level"]')
+        radiolevel: document.querySelectorAll('input[name="level"]'),
+        maxScore: document.querySelector("#max-score"),
     },
     values: {
         timerId: null,
@@ -73,10 +74,11 @@ const state = {
         stopGame()
     };
     function stopGame(){
-        if(state.values.timer<=0 || state.values.lifeCounter <=0){
+        if(state.values.timer<=0 || state.values.lifeCounter <= 0){
             sfx("gameCompleted");
             state.view.finalScore.textContent = state.values.baseScore;
             showdiv("gameOverDiv");
+            checkRecord();
             reset();
         }
     };
@@ -130,7 +132,21 @@ const state = {
         state.view.radiolevel.forEach((input) => {
             input.disabled = disable;
         });
-    }
+    };
+    function checkRecord(){
+        let recordeAtual = Number(localStorage.getItem("highScore")) || 0;
+        
+        if (state.values.baseScore > recordeAtual){
+            localStorage.setItem("highScore", state.values.baseScore);
+        }
+        
+        displayRecord();
+    };
+
+    function displayRecord(){
+        let recorde = Number(localStorage.getItem("highScore")) || 0;
+        state.view.maxScore.textContent = recorde;
+    };
 function main() {
     if(state.values.gameRunning == true){
         setDifficulty()
@@ -145,6 +161,7 @@ Object.values(state.sounds).forEach(audio => {
     audio.load();
 });
 listenerhitEnemy();
+displayRecord();
 state.view.restartbtn.addEventListener("click", ()=>{
     hiddediv("gameOverDiv");
     state.values.gameRunning = true;
