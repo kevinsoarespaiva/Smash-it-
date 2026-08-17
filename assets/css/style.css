@@ -82,15 +82,12 @@ input[type="radio"]{
     font-size: 1.3rem;
 }
 @media (max-width: 945px){
-    #level{
+    #level, #record{
         position: static;
         transform: none;
         width: 100%;
         padding: 0.5rem;
     }
-    /* #infobar{
-        flex-wrap: wrap;
-    } */
 }
 #menu-lives img{
     max-height: 2rem;
