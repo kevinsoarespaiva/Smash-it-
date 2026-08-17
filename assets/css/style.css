@@ -23,6 +23,7 @@ header{
     background-color: #000000;
     border-bottom: 0.5rem solid rgb(255, 221, 0);
     color: #ffffff;
+    flex-wrap: wrap;
 }
 #infobar{
     display: flex;
@@ -57,6 +58,17 @@ input[type="radio"]{
 }
 #level label{
     font-size: 1.3rem;
+}
+@media (max-width: 945px){
+    #level{
+        position: static;
+        transform: none;
+        width: 100%;
+        padding: 0.5rem;
+    }
+    /* #infobar{
+        flex-wrap: wrap;
+    } */
 }
 #menu-lives img{
     max-height: 2rem;
