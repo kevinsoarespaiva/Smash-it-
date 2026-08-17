@@ -132,11 +132,13 @@ main{
     background-image: url(../images/enemy/zombie.png);
     background-size: contain;
     background-position: center;
+    background-repeat: no-repeat;
 }
 .enemy-hit{
     background-image: url(../images/enemy/zumbi_hit.png);
     background-size: contain;
     background-position: center;
+    background-repeat: no-repeat;
 }
 #start{
     display: flex;
