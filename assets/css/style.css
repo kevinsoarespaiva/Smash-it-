@@ -25,6 +25,28 @@ header{
     color: #ffffff;
     flex-wrap: wrap;
 }
+#record{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    flex-direction: column;
+    left: 0;
+    top: 50%;
+    transform: translatey(-50%);
+    width: 100%;
+    max-width: 200px;
+    height: inherit;
+    padding: 1.5rem;
+    font-size: 1.5rem; 
+}   
+#record>div{
+    width: fit-content;
+    height: fit-content;
+    padding: 0;
+    text-align: center;
+}
 #infobar{
     display: flex;
     justify-content: center;
